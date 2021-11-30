@@ -6,7 +6,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { GoogleMapsModule } from '@angular/google-maps'
 
 
 @NgModule({
@@ -18,7 +18,8 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
-    SafePipeModule
+    SafePipeModule,
+    GoogleMapsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
