@@ -5,14 +5,102 @@
   #map-canvas > div.i4ewOd-pzNkMb-haAclf > div.i4ewOd-pzNkMb-tJHJj > div > div .i4ewOd-pzNkMb-ornU0b-b0t70b-Bz112c{
     display: none;
   }
-</style>
+  .a{
+    background-color: black;
+    border: 1px solid black;
+  }
+  .menu{
+    position: absolute;
+    background-color: white;
+    top: 70px;
+    width: 320px;
+    color: black;
+    left: 550px;
+  }
+  .menu-items{
+    display: flex;
+    list-style: none;
+    position: relative;
+    left: -20px;
+  }
+  li{
+    margin-left: 30px;
+    font-size: 20px;
+  }
+  h1{
+    color: white;
+    background-color: black;
+    position: relative;
+    top: -30px;
+  }
 
-<div>
+  .c{
+    font-size: 30px;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  .d{
+    background-color: white;
+    position: relative;
+    top: 50px;
+    width: 800px;
+    border-radius: 15px;
+    left: 30px;
+    height: 400px;
+  }
+  .e{
+    position: relative;
+    top: -160px;
+    left: 30px;
+  }
+  .f{
+    background-color:orangered;
+    position: relative;
+    top: -860px;
+    left: 830px;
+    font-size: 20px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    height: 675px;
+    border-radius: 15px;
+    border: 5px solid black;
+    width: 510px;
+  }
+  .g{
+    position: relative;
+    top: 80px;
+    color: white;
+    background-color: black;
+    left: 20px;
+    text-align: center;
+    height: 400px;
+  }
+</style>
+<body class="a">
+<div class="c">
+  KonteBliz
+</div>
+ <h1>Welcome to {{title}}</h1>
+
+ <div class="menu">
+   <ul class="menu-items">
+     <li><a>Home</a></li>
+     <li><a>About</a></li>
+     <li><a>Contact</a></li>
+   </ul>
+ </div>
+<div class="d">
+  <p>{{lat}}</p>
+  <p>{{lng}}</p>
+  <p>{{txt}}</p>
+  <!-- # znaci svojstvo -->
+  <mat-checkbox #e1 [checked]="checked" (change)="promena(checked)">Check me!</mat-checkbox>
+</div>
+<div class="e">
   <!--<p><iframe src="https://www.google.com/maps/d/embed?mid=1HvG1kMCwXXGwl3G69R04_huPV1TICKKM" width="640" height="480"></iframe></p>
   -->
   <p><iframe 
-    width="300" 
-    height="170" 
+    width="800" 
+    height="470" 
     frameborder="0" 
     scrolling="no" 
     marginheight="0" 
@@ -21,14 +109,17 @@
    >
    </iframe></p>
   </div>
-
- <h1>Welcome to {{title}}</h1>
-<div>
-  <p>{{lat}}</p>
-  <p>{{lng}}</p>
-  <p>{{txt}}</p>
-  <p>{{getURL()}}</p>
-  <!-- # znaci svojstvo -->
-  <mat-checkbox #e1 [checked]="checked" (change)="promena(checked)">Check me!</mat-checkbox>
-</div>
+  <div class="f">
+    <h1>Lorem Ipsum</h1>
+    <div class="g">
+    "Lorem ipsum dolor sit amet,<br>consectetur adipiscing elit,<br>
+     sed do eiusmod tempor incididunt<br> ut labore et dolore magna aliqua.<br>
+     Ut enim ad minim veniam, quis nostrud<br> exercitation ullamco laboris<br>
+      nisi ut aliquip ex ea commodo consequat.<br> Duis aute irure dolor in <br>
+      reprehenderit in voluptate velit esse<br> cillum dolore eu fugiat nulla<br>
+       pariatur. Excepteur sint occaecat cupidatat<br> non proident, sunt in culpa<br>
+        qui officia deserunt mollit anim id<br> est laborum."
+    </div>
+  </div>
+</body>
 </html>
