@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, Directive, Inject, Input, OnInit} from '@angular/core'
-import {GoogleMap, GoogleMapsModule} from '@angular/google-maps';
+import { AfterViewInit, Component, Directive, Inject, Input, OnInit } from '@angular/core'
+import { GoogleMap, GoogleMapsModule } from '@angular/google-maps';
 import { ViewChild } from '@angular/core';
 
 
@@ -17,13 +17,13 @@ declare var google: any;
 @Pipe({
   name: 'safe',
 })
-export class MyPipe implements PipeTransform{
+export class MyPipe implements PipeTransform {
 
   constructor(public sanitizer: DomSanitizer) {
     this.sanitizer = sanitizer;
   }
 
-  transform(url){
+  transform(url) {
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 }
@@ -35,7 +35,7 @@ export class MyPipe implements PipeTransform{
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
-export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule{
+export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
 
   public lat;
   public lng;
@@ -51,18 +51,18 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule{
   //@ViewChild(GoogleMap, { static: false })
   //map!: GoogleMap;
   markers_coordinates = [
-    { lat: 42.002619, lng: 21.406634 },
-    { lat: 42.002867, lng: 21.405255 },
-    { lat: 41.865263, lng: 21.937186 },
-    { lat: 42.005239, lng: 21.410855 },
-    { lat: 42.006981, lng: 21.412211 },
-    { lat: 42.005128, lng: 21.417274 }
+    { lat: 42.002619, lng: 21.406634, name: "Kanta1" },
+    { lat: 42.002867, lng: 21.405255, name: "Kanta2" },
+    { lat: 41.865263, lng: 21.937186, name: "Kanta3" },
+    { lat: 42.005239, lng: 21.410855, name: "Kanta3" },
+    { lat: 42.006981, lng: 21.412211, name: "Kanta4" },
+    { lat: 42.005128, lng: 21.417274, name: "Kanta5" }
   ];
   markers: any[] = [];
 
   title = 'digit';
 
-  constructor(public override sanitizer: DomSanitizer){
+  constructor(public override sanitizer: DomSanitizer) {
     super(sanitizer);
 
   }
@@ -92,28 +92,28 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule{
   }*/
 
   addMarker() {
-    for(var i = 0; i < this.markers_coordinates.length + 1; i++){
-    this.markers.push({
-      position: {
-        lat: this.markers_coordinates[i].lat,
-        lng: this.markers_coordinates[i].lng,
-      },
-      label: {
-        color: 'red',
-        text: 'Marker label ' + (i),
-      },
-      title: 'Marker title ' + (i),
-      options: { animation: google.maps.Animation.BOUNCE },
-    })
+    for (var i = 0; i < this.markers_coordinates.length + 1; i++) {
+      this.markers.push({
+        position: {
+          lat: this.markers_coordinates[i].lat,
+          lng: this.markers_coordinates[i].lng,
+        },
+        label: {
+          color: 'red',
+          text: 'Marker label ' + (i),
+        },
+        title: this.markers_coordinates[i].name,
+        options: { animation: google.maps.Animation.BOUNCE },
+      })
 
-  }
+    }
   }
 
 
 
   ngOnInit(): void {
-    navigator.geolocation.getCurrentPosition(position => {this.lat=position.coords.latitude});
-    navigator.geolocation.getCurrentPosition(position => {this.lng=position.coords.longitude});
+    navigator.geolocation.getCurrentPosition(position => { this.lat = position.coords.latitude });
+    navigator.geolocation.getCurrentPosition(position => { this.lng = position.coords.longitude });
 
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
@@ -135,37 +135,38 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule{
 
 
   }*/
-
-  shortestDistance(){
-    var min=600000;
-    navigator.geolocation.getCurrentPosition(position => {this.lat=position.coords.latitude});
-    navigator.geolocation.getCurrentPosition(position => {this.lng=position.coords.longitude});
-    for(var i=0;i<this.markers.length;i++)
-    {
-      if(this.getDistanceFromLatLonInKm(this.lat,this.lng,this.markers[i].position.lat,this.markers[i].position.lng) < min)
-      {
-        min = this.getDistanceFromLatLonInKm(this.lat,this.lng,this.markers[i].position.lat,this.markers[i].position.lng);
+  
+  shortestDistance() {
+    var index;
+    var min = 600000;
+    navigator.geolocation.getCurrentPosition(position => { this.lat = position.coords.latitude });
+    navigator.geolocation.getCurrentPosition(position => { this.lng = position.coords.longitude });
+    for (var i = 0; i < this.markers.length; i++) {
+      if (this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers[i].position.lat, this.markers[i].position.lng) < min) {
+        index = i;
+        min = this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers[i].position.lat, this.markers[i].position.lng);
       }
     }
-    return min;
+    var str = this.markers_coordinates[index].name + " " + min;
+    return str;
   }
 
   getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     var R = 6371; // Radius of the earth in km
-    var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
-    var dLon = this.deg2rad(lon2-lon1);
+    var dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
+    var dLon = this.deg2rad(lon2 - lon1);
     var a =
-      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
-      Math.sin(dLon/2) * Math.sin(dLon/2)
+      Math.sin(dLon / 2) * Math.sin(dLon / 2)
       ;
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c; // Distance in km
     return d;
   }
 
   deg2rad(deg) {
-    return deg * (Math.PI/180)
+    return deg * (Math.PI / 180)
   }
 
 
