@@ -23,6 +23,7 @@
     "@angular/router": "~13.0.0",
     "@types/googlemaps": "^3.43.3",
     "hammerjs": "^2.0.8",
+    "parse-kml": "^1.0.1",
     "rxjs": "~7.4.0",
     "safe-pipe": "^1.0.3",
     "tslib": "^2.3.0",

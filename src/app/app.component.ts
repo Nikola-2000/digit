@@ -56,10 +56,65 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
     { lat: 41.865263, lng: 21.937186, name: "Kanta3" },
     { lat: 42.005239, lng: 21.410855, name: "Kanta3" },
     { lat: 42.006981, lng: 21.412211, name: "Kanta4" },
-    { lat: 42.005128, lng: 21.417274, name: "Kanta5" }
+    { lat: 42.003185, lng: 21.3317412, name: "Стакло" },
+    { lat: 42.0072291, lng: 21.332638, name: "Стакло" },
+    { lat: 42.0058601, lng: 21.3505605, name: "Стакло" },
+    { lat: 42.006534, lng: 21.3549359, name: "Стакло" },
+    { lat: 42.0088306, lng: 21.3531533, name: "Стакло" },
+    { lat: 42.0097048, lng: 21.3604459, name: "Стакло" },
+    { lat: 42.0068278, lng: 21.3614696, name: "Стакло" },
+    { lat: 42.0061279, lng: 21.3653616, name: "Стакло" },
+    { lat: 42.0080118, lng: 21.3656498, name: "Стакло" },
+    { lat: 42.007663, lng: 21.3714756, name: "Стакло" },
+    { lat: 42.0027558, lng: 21.3718041, name: "Стакло" },
+    { lat: 42.0178783, lng: 21.3564162, name: "Стакло" },
+    { lat: 42.0192049, lng: 21.3551878, name: "Стакло" },
+    { lat: 42.0205895, lng: 21.3533778, name: "Стакло" },
+    { lat: 42.0209671, lng: 21.351952, name: "Стакло" },
+    { lat: 42.0500839, lng: 21.3633732, name: "Стакло" },
+    { lat: 42.0256286, lng: 21.3799761, name: "Стакло" },
+    { lat: 42.0256735, lng: 21.3800217, name: "Стакло" },
+    { lat: 42.0060225, lng: 21.3833249, name: "Стакло" },
+    { lat: 42.0046576, lng: 21.3828762, name: "Стакло" },
+    { lat: 42.0015786, lng: 21.3836405, name: "Стакло" },
+    { lat: 42.0092748, lng: 21.3847974, name: "Стакло" },
+    { lat: 42.0056945, lng: 21.3866579, name: "Стакло" },
+    { lat: 42.0039897, lng: 21.3878195, name: "Стакло" },
+    { lat: 42.0053231, lng: 21.3895135, name: "Стакло" },
+    { lat: 42.0060161, lng: 21.3898348, name: "Стакло" },
+    { lat: 42.0062211, lng: 21.3915699, name: "Стакло" },
+    { lat: 42.0017263, lng: 21.3898524, name: "Стакло" },
+    { lat: 41.9995258, lng: 21.3915382, name: "Стакло" },
+    { lat: 41.9974343, lng: 21.3922196, name: "Стакло" },
+    { lat: 42.0033278, lng: 21.3947149, name: "Стакло" },
+    { lat: 42.0044959, lng: 21.3954958, name: "Стакло" },
+    { lat: 42.0056907, lng: 21.3962591, name: "Стакло" },
+    { lat: 42.0063465, lng: 21.3954163, name: "Стакло" },
+    { lat: 42.0068376, lng: 21.3947045, name: "Стакло" },
+    { lat: 41.4433875, lng: 22.6400007, name: "Стакло" },
+    { lat: 41.4433639, lng: 22.6399893, name: "Стакло" },
+    { lat: 41.4433327, lng: 22.6399839, name: "Стакло" },
+    { lat: 41.4436608, lng: 22.6405894, name: "Стакло" },
+    { lat: 41.445655, lng: 22.6409224, name: "Стакло" },
+    { lat: 41.4430115, lng: 22.641137, name: "Стакло" },
+    { lat: 41.4434828, lng: 22.6417565, name: "Стакло" },
+    { lat: 41.4441591, lng: 22.6421895, name: "Стакло" },
+    { lat: 41.9851101, lng: 21.4381565, name: "Стакло" },
+    { lat: 41.9844232, lng: 21.4386809, name: "Стакло" },
+    { lat: 41.9849167, lng: 21.4399509, name: "Стакло" },
+    { lat: 41.9817124, lng: 21.4403548, name: "Стакло" },
+    { lat: 41.980917, lng: 21.4428841, name: "Стакло" },
+    { lat: 41.9782172, lng: 21.4403748, name: "Стакло" },
+    { lat: 42.0056945, lng: 21.3866579, name: "Стакло" },
+    { lat: 41.1993534, lng: 22.571417, name: "Стакло" },
+
+
+
+
+
+
   ];
   markers: any[] = [];
-
   title = 'digit';
 
   constructor(public override sanitizer: DomSanitizer) {
@@ -135,7 +190,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
 
 
   }*/
-  
+
   shortestDistance() {
     var index;
     var min = 600000;
@@ -147,6 +202,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
         min = this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers[i].position.lat, this.markers[i].position.lng);
       }
     }
+    min = min*1000;
     var str = this.markers_coordinates[index].name + " " + min;
     return str;
   }
