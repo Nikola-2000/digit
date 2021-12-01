@@ -14,10 +14,10 @@ declare var google: any;
 })
 export class MyPipe implements PipeTransform{
 
-  constructor(public sanitizer: DomSanitizer) { 
+  constructor(public sanitizer: DomSanitizer) {
     this.sanitizer = sanitizer;
   }
-  
+
   transform(url){
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
@@ -51,7 +51,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule{
     { lat: 47.92393, lng: 78.58339 }
   ];
   markers: any[] = [];
-  
+
   title = 'digit';
 
   constructor(public override sanitizer: DomSanitizer){
@@ -62,13 +62,13 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule{
   /*ngAfterViewInit(): void {
     navigator.geolocation.getCurrentPosition(position => {this.lat=position.coords.latitude});
     navigator.geolocation.getCurrentPosition(position => {this.lng=position.coords.longitude});
-    
+
     const mapProperties = {
       center: new google.maps.LatLng(this.lat, this.lng),
       zoom: 2,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    
+
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties);
 
     this.markers_coordinates.forEach(location => {
@@ -76,11 +76,11 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule{
         position: new google.maps.LatLng(location.lat,location.lng),
         map: this.map
       });
-      
+
       this.markers.push(marker);
 
     });
-    
+
   }*/
 
 
@@ -101,8 +101,8 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule{
     })
   }
   }
-  
-  
+
+
 
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition(position => {this.lat=position.coords.latitude});
@@ -115,7 +115,24 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule{
       }
     })
     this.addMarker();
-   
+
+  }
+
+  public getDistance(origin_lat: number, origin_lng: number, destination_lat: number, destination_lng: number){
+
+    const matrix = new google.maps.DistanceMatrixService();
+
+    matrix.getDistanceMatrix({
+      origins: [{lat: origin_lat, lng: origin_lng}],
+      destinations: [{lat: destination_lat, lng: destination_lng}],
+      travelMode: google.maps.TravelMode.DRIVING,
+    }, function(response, status){
+        if(status == 'OK'){
+          alert(response.rows[0].elements);
+        }else{
+          alert("Ne e OK" + response.rows[0].elements);
+        }
+    });
   }
 
   getURL(){
@@ -123,7 +140,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule{
     navigator.geolocation.getCurrentPosition(position => {this.lng=position.coords.longitude});
     //return this.transform("https://maps.google.com/maps?q=" + this.lat.toString() + "," + this.lng.toString() + "&hl=es;z=14&amp;output=embed")
     return this.sanitizer.bypassSecurityTrustResourceUrl("https://maps.google.com/maps?q=" + this.lat.toString() + "," + this.lng.toString() + "&hl=es;z=14&amp;&output=embed");
-    
+
   }
 
 }
