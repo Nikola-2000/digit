@@ -203,7 +203,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
       }
     }
     min = min*1000;
-    var str = this.markers_coordinates[index].name + " " + min;
+    var str = "Тип: " + this.markers_coordinates[index].name + " Оддалеченост: " + min;
     return str;
   }
 
