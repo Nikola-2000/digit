@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+
 <style>
   #map-canvas>div.i4ewOd-pzNkMb-haAclf>div.i4ewOd-pzNkMb-tJHJj>div>div .i4ewOd-pzNkMb-ornU0b-b0t70b-Bz112c {
     display: none;
@@ -132,7 +131,7 @@
   <h5>Mapata od google api</h5>
 
   <div #map id="google-map">
-    <google-map height="500px" width="100%" [center]="center">
+    <google-map height="500px" width="100%" [center]="center" [zoom]="zoom">
 
       <map-marker *ngFor="let item of markers" [position]="item.position">
       </map-marker>
@@ -144,12 +143,16 @@
   <div>{{markers | json}}</div>
 
   <h5>Distanca pomegju 2 markeri</h5>
-  <div>
-      {{getDistance(lat,lng,markers[0].position.lat,markers[0].position.lng)}}
-  </div>
+  <div>{{ getDistanceFromLatLonInKm(22.33159, 105.63233 ,7.92658 , -12.05228)}}</div>
+  <!--<div>{{getDistance(lat,lng,markers[0].position.lat,markers[0].position.lng)}}</div>-->
+  <!--
+    *ngFor="let item of markers"
+    <div>
+
+  </div>-->
 
 
 
-</body>
 
-</html>
+
+
