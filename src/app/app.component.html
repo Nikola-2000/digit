@@ -1,94 +1,77 @@
-<!DOCTYPE html>
-<html>
-<style>
 
-  #map-canvas > div.i4ewOd-pzNkMb-haAclf > div.i4ewOd-pzNkMb-tJHJj > div > div .i4ewOd-pzNkMb-ornU0b-b0t70b-Bz112c{
+<style>
+  #map-canvas>div.i4ewOd-pzNkMb-haAclf>div.i4ewOd-pzNkMb-tJHJj>div>div .i4ewOd-pzNkMb-ornU0b-b0t70b-Bz112c {
     display: none;
   }
-  
+
+  #google-map {
+    width: 50%;
+    height: -100px;
+    position: absolute;
+    top: 871px;
+    left: 50px;
+  }
 </style>
 
-<body>
-  
+<body class="a">
+  <div class="c">
+    KonteBliz
+  </div>
+  <h1>Welcome to {{title}}</h1>
+
+  <div class="menu">
+    <ul class="menu-items">
+      <li><a>Home</a></li>
+      <li><a>About</a></li>
+      <li><a>Contact</a></li>
+    </ul>
+  </div>
+  <div class="d">
+    <p>{{lat}}</p>
+    <p>{{lng}}</p>
+
+  </div>
+  <div class="e">
+    <!--<p><iframe src="https://www.google.com/maps/d/embed?mid=1HvG1kMCwXXGwl3G69R04_huPV1TICKKM" width="640" height="480"></iframe></p>
+  -->
+  </div>
+  <div class="f">
+    <h1>Lorem Ipsum Check host</h1>
+    <div class="g">
+      "Lorem ipsum dolor sit amet,<br>consectetur adipiscing elit,<br>
+      sed do eiusmod tempor incididunt<br> ut labore et dolore magna aliqua.<br>
+      Ut enim ad minim veniam, quis nostrud<br> exercitation ullamco laboris<br>
+      nisi ut aliquip ex ea commodo consequat.<br> Duis aute irure dolor in <br>
+      reprehenderit in voluptate velit esse<br> cillum dolore eu fugiat nulla<br>
+      pariatur. Excepteur sint occaecat cupidatat<br> non proident, sunt in culpa<br>
+      qui officia deserunt mollit anim id<br> est laborum."
+    </div>
+  </div>
+  <h5>Mapata od google api</h5>
+
+  <div #map id="google-map">
+    <google-map height="500px" width="100%" [center]="center" [zoom]="zoom">
+
+      <map-marker *ngFor="let item of markers" [position]="item.position">
+      </map-marker>
+
+    </google-map>
+  </div>
+
+  <!--<h5>Neshto markers json</h5>
+  <div>{{markers | json}}</div>-->
+
+  <h5>Najbliskata kanta e na :</h5>
+  <div>{{shortestDistance()}} km</div>
+  <!--<div>{{getDistance(lat,lng,markers[0].position.lat,markers[0].position.lng)}}</div>-->
+  <!--
+    *ngFor="let item of markers"
     <div>
-        <!--<p><iframe src="https://www.google.com/maps/d/embed?mid=1HvG1kMCwXXGwl3G69R04_huPV1TICKKM" width="640" height="480"></iframe></p>
-        -->
-        <p><iframe 
-          width="300" 
-          height="170" 
-          frameborder="0" 
-          scrolling="no" 
-          marginheight="0" 
-          marginwidth="0" 
-          [src]="getURL()"
-         >
-         </iframe></p>
-        </div>
-      
-       <h1>Welcome to {{title}}</h1>
-      <div>
-        <p>{{lat}}</p>
-        <p>{{lng}}</p>
-        <p>{{txt}}</p>
-        <p>{{getURL()}}</p>
-        <!-- # znaci svojstvo -->
-        <mat-checkbox #e1 [checked]="checked" (change)="promena(checked)">Check me!</mat-checkbox>
-      </div>
-      
-    <div class="about-section">
-      <h1>About Us Page</h1>
-      <p>Some text about who we are and what we do.</p>
-      <p>Resize the browser window to see that this page is responsive by the way.</p>
-    </div>
-    
-    <h2 style="text-align:center">Our Team</h2>
-    <div class="row">
-      <div class="column">
-        <div class="card">
-          <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
-          <div class="container">
-            <h2>Jane Doe</h2>
-            <p class="title">CEO & Founder</p>
-            <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-            <p>jane@example.com</p>
-            <p><button class="button">Contact</button></p>
-          </div>
-        </div>
-      </div>
-    
-      <div class="column">
-        <div class="card">
-          <img src="/w3images/team2.jpg" alt="Mike" style="width:100%">
-          <div class="container">
-            <h2>Mike Ross</h2>
-            <p class="title">Art Director</p>
-            <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-            <p>mike@example.com</p>
-            <p><button class="button">Contact</button></p>
-          </div>
-        </div>
-      </div>
-      
-      <div class="column">
-        <div class="card">
-          <img src="/w3images/team3.jpg" alt="John" style="width:100%">
-          <div class="container">
-            <h2>John Doe</h2>
-            <p class="title">Designer</p>
-            <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-            <p>john@example.com</p>
-            <p><button class="button">Contact</button></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="about-section">
-      <h1>Why</h1>
-      <p>Some text about who we are and what we do.</p>
-      <p>Resize the browser window to see that this page is responsive by the way.</p>
-    </div>
-    
-</body> 
-    
-</html>
+
+  </div>-->
+
+
+
+
+
+
