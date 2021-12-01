@@ -30,14 +30,19 @@ export class MyPipe implements PipeTransform{
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
-export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule, AfterViewInit{
+export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule{
 
   public lat;
   public lng;
   public center!: google.maps.LatLngLiteral;
+  //map: any;
+  //@ViewChild('map') mapElement: any;
+
   map: any;
   @ViewChild('map') mapElement: any;
-  markers = [
+  //@ViewChild(GoogleMap, { static: false })
+  //map!: GoogleMap;
+  markers_coordinates = [
     { lat: 22.33159, lng: 105.63233 },
     { lat: 7.92658, lng: -12.05228 },
     { lat: 48.75606, lng: -118.859 },
@@ -45,8 +50,8 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule, Af
     { lat: 12.09407, lng: 26.31618 },
     { lat: 47.92393, lng: 78.58339 }
   ];
-  public checked = true;
-  txt = "Hello";
+  markers: any[] = [];
+  
   title = 'digit';
 
   constructor(public override sanitizer: DomSanitizer){
@@ -54,40 +59,48 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule, Af
 
   }
 
-  ngAfterViewInit(): void {
+  /*ngAfterViewInit(): void {
+    navigator.geolocation.getCurrentPosition(position => {this.lat=position.coords.latitude});
+    navigator.geolocation.getCurrentPosition(position => {this.lng=position.coords.longitude});
     
     const mapProperties = {
       center: new google.maps.LatLng(this.lat, this.lng),
       zoom: 2,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+    
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties);
 
-    this.markers.forEach(location => {
+    this.markers_coordinates.forEach(location => {
       var marker = new google.maps.Marker({
-        position: new google.maps.LatLngLiteral(location.lat,location.lng),
+        position: new google.maps.LatLng(location.lat,location.lng),
         map: this.map
       });
+      
+      this.markers.push(marker);
+
     });
     
-  }
+  }*/
 
 
 
-  /*addMarker() {
+  addMarker() {
+    for(var i = 0; i < this.markers_coordinates.length + 1; i++){
     this.markers.push({
       position: {
-        lat: navigator.geolocation.getCurrentPosition(this.get_latitude),
-        lng: navigator.geolocation.getCurrentPosition(this.get_longitude),
+        lat: this.markers_coordinates[i].lat,
+        lng: this.markers_coordinates[i].lng,
       },
       label: {
         color: 'red',
-        text: 'Marker label ' + (this.markers.length + 1),
+        text: 'Marker label ' + (i),
       },
-      title: 'Marker title ' + (this.markers.length + 1),
+      title: 'Marker title ' + (i),
       options: { animation: google.maps.Animation.BOUNCE },
     })
-  }*/
+  }
+  }
   
   
 
@@ -97,46 +110,14 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule, Af
 
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
+        lat: 0,
+        lng: 0,
       }
     })
-    //this.addMarker();
-    this.getUserLocation();
+    this.addMarker();
+   
   }
 
-  
-
-
-
-  promena($event){
-    console.log("event", $event);
-    console.log(this.checked);
-
-    if(this.txt == "Hello"){
-      this.txt="Goodbye";
-    }else{
-      this.txt = "Hello";
-    }
-
-
-  }
-
-
-  getUserLocation() {
-    if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-      });
-      
-      
-    }else {
-      alert("You did not allow location")
-
-    }
-  }
- 
   getURL(){
     navigator.geolocation.getCurrentPosition(position => {this.lat=position.coords.latitude});
     navigator.geolocation.getCurrentPosition(position => {this.lng=position.coords.longitude});

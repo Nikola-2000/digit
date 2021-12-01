@@ -108,9 +108,7 @@
   <div class="d">
     <p>{{lat}}</p>
     <p>{{lng}}</p>
-    <p>{{txt}}</p>
-    <!-- # znaci svojstvo -->
-    <mat-checkbox #e1 [checked]="checked" (change)="promena(checked)">Check me!</mat-checkbox>
+    
   </div>
   <div class="e">
     <!--<p><iframe src="https://www.google.com/maps/d/embed?mid=1HvG1kMCwXXGwl3G69R04_huPV1TICKKM" width="640" height="480"></iframe></p>
@@ -135,14 +133,25 @@
   
   <div #map id="google-map">
     <google-map height="500px" width="100%" [center]="center">
-      <map-marker *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label" [title]="marker.title">
+      <map-marker [position]="markers[0].position">
+      </map-marker>
+      <map-marker [position]="markers[1].position">
+      </map-marker>
+      <map-marker [position]="markers[2].position">
+      </map-marker>
+      <map-marker [position]="markers[3].position">
+      </map-marker>
+      <map-marker [position]="markers[4].position">
+      </map-marker>
+      <map-marker [position]="markers[5].position">
       </map-marker>
     </google-map>
   </div>
 
   <h5>Neshto markers json</h5>
   <div>{{markers | json}}</div>
-
+  
+  
 
 </body>
 
