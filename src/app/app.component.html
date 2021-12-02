@@ -282,9 +282,10 @@
     <div #map id="google-map">
       <!-- MAPATA E TUKA -->
       <google-map height="500px" width="100%" [center]="center" [zoom]="zoom">
-
-        <map-marker *ngFor="let item of markers" [position]="item.position" [options]="item.options">
-        </map-marker>
+        <<ng-container *ngFor="let item of markers" >
+          <map-marker  *ngIf="selectedOption == item.title" [position]="item.position" [options]="item.options">
+          </map-marker>
+      </ng-container>
         <map-marker [position]="new_center">
 
         </map-marker>
@@ -307,8 +308,12 @@
 
   </header>
   <section class="why">
-    <p id="zosto">"Зошто рециклирање?"</p>
-    <p id="tekst-reciklirane">"Рециклирање (преработка на отпад или добивање на второсуровини) е преработка на
+    <p id="zosto" style="    color: green;
+    font-size: 30px;
+    font-family: monospace;">"Зошто рециклирање?"</p>
+    <p id="tekst-reciklirane"style="    color: green;
+    font-size: 16px;
+    font-family: monospace;" >"Рециклирање (преработка на отпад или добивање на второсуровини) е преработка на
       користените материјали за добивање нови производи. Со овој процес се спречува губењето на материјали, намалувањето
       на потрошувачката на нови суровини, се намалува користењето на енергијата, се намалува загадувањето во воздухот и
       во водата. Се рециклираат многу видови на стакло, хартија, метал, пластика, текстил и електроника. Речиси половина

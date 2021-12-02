@@ -1315,15 +1315,15 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
 
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
-        lat: this.lat,
-        lng: this.lng
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
       }
 
     })
     navigator.geolocation.getCurrentPosition((position) => {
       this.new_center = {
-        lat: this.lat,
-        lng: this.lng
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
       }
 
     })
