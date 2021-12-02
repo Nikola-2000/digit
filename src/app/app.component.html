@@ -285,16 +285,21 @@
 
         <map-marker *ngFor="let item of markers" [position]="item.position" [options]="item.options">
         </map-marker>
+        <map-marker [position]="new_center">
+
+        </map-marker>
 
       </google-map>
     </div>
     <h2>Najbliskata kanta e na :</h2>
     <div>{{shortestDistance()}} m</div>
-    <select [(ngModel)]="selectedOption">
-      <option *ngFor="let o of options">
-         {{o.name}}
-      </option>
-   </select>
+
+      <select [(ngModel)]="selectedOption">
+        <option *ngFor="let o of options">
+          {{o.name}}
+        </option>
+      </select>
+
    <button (click)="print()">Click me</button>
 
    <p>Селектирана опција: {{ selectedOption }}</p>
@@ -326,28 +331,26 @@
 
       <h3>Тимот</h3>
       <div class="feature">
-        <img src="stef.jpg" alt="" />
+        <img src="/assets/stef.jpg" alt="" />
         <p>Стефан Крстески</p>
       </div>
 
       <div class="feature">
-        <img src="Miki.jpg" alt="" />
+        <img src="/assets/Miki.jpg" alt="" />
         <p>Никола Стојановски</p>
       </div>
 
       <div class="feature">
-        <img src="Bato.jpg" alt="" />
+        <img src="/assets/Bato.jpg" alt="" />
         <p>Дарко Апостолов</p>
       </div>
       <div class="feature">
-        <img src="andrej.jpg" alt="" />
+        <img src="/assets/andrej.jpg" alt="" />
         <p>Aндреј Петровски</p>
       </div>
 
     </div>
   </section>
-
-
 
   <footer>
     <div>

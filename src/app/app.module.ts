@@ -4,6 +4,10 @@ import {BrowserModule} from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCheckboxModule} from '@angular/material/checkbox'
 import { HttpClientModule } from '@angular/common/http';
+import {MatSelectModule} from '@angular/material/select';
+import { MatFormField } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,7 +26,9 @@ import { FormsModule } from '@angular/forms';
     SafePipeModule,
     GoogleMapsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

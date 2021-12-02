@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { TransitionCheckState } from '@angular/material/checkbox';
 import { MatOptionSelectionChange } from '@angular/material/core';
 
+
 declare var google: any;
 
 @Pipe({
@@ -43,6 +44,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
 
   public lat;
   public lng;
+  public new_center!: google.maps.LatLngLiteral;
   private http!: HttpClient;
   zoom = 14;
   public center!: google.maps.LatLngLiteral;
@@ -1182,7 +1184,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
     { lng: 22.0161675, lat: 41.4293782, name: "Hartija/kompozit" },
     { lng: 22.0104218, lat: 41.4417494, name: "Hartija/kompozit" },
     { lng: 22.0072546, lat: 41.440859, name: "Hartija/kompozit" },
-    { lng: 22.0185058, lat: 41.4181785, name: "Hartija/kompozit" },
+    { lng: 22.0185058, lat: 41.4181785, name: "Hartija/kompozit" }
   ];
   markers: any[] = [];
   title = 'digit';
@@ -1232,10 +1234,15 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
     min = min * 1000;
     var str = "Тип: " + this.markers_coordinates[index].name + " Оддалеченост: " + min;
     this.text = str;
-    }
+  }
+
 
   addMarker() {
+    //console.log(lat_temp);
+    //console.log(lng_temp);
+    //console.log(this.markers_coordinates[this.markers_coordinates.length - 1]);
     for (var i = 0; i < this.markers_coordinates.length + 1; i++) {
+      //console.log(this.markers_coordinates[i].name);
       var icon;
       if(this.markers_coordinates[i].name == "Staklo"){
         icon = {
@@ -1259,6 +1266,13 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
           anchor: new google.maps.Point(0, 0) // anchor
         };
 
+      }else if(this.markers_coordinates[i].name == "MyPosition"){
+        icon = {
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+
       }
       this.markers.push({
         position: {
@@ -1274,6 +1288,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
       })
 
     }
+
   }
 
    msg!:string;
@@ -1300,12 +1315,30 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
 
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
-        lat: 41.99646,
-        lng: 21.43141
+        lat: this.lat,
+        lng: this.lng
       }
+
     })
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.new_center = {
+        lat: this.lat,
+        lng: this.lng
+      }
+
+    })
+
     this.addMarker();
 
+  }
+  getYourLat(){
+
+    navigator.geolocation.getCurrentPosition(position => { this.lat = position.coords.latitude });
+    return this.lat;
+  }
+  getYourLng(){
+    navigator.geolocation.getCurrentPosition(position => { this.lng = position.coords.longitude });
+    return this.lng;
   }
 
   /*getDistanceMatrix(sendQuery): Observable<any> {
