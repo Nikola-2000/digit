@@ -1238,12 +1238,30 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
 
   addMarker() {
     for (var i = 0; i < this.markers_coordinates.length + 1; i++) {
-      var icon = {
-        url: "/assets/recycle_1.png", // url
-        scaledSize: new google.maps.Size(50, 50), // scaled size
-        origin: new google.maps.Point(0,0), // origin
-        anchor: new google.maps.Point(0, 0) // anchor
-      };
+      
+      if(this.markers_coordinates[i].name == "Staklo"){
+        var icon = {
+          url: "/assets/recycle_red.png", // url
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+      }else if(this.markers_coordinates[i].name == "Hartija/kompozit"){
+        var icon = {
+          url: "/assets/recycle_blue.png", // url
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };   
+      }else if(this.markers_coordinates[i].name == "Plastika/limenki"){
+        var icon = {
+          url: "/assets/recycle_yellow.png", // url
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+      
+      }
       this.markers.push({
         position: {
           lat: this.markers_coordinates[i].lat,
