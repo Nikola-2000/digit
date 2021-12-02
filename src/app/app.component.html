@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>App Landing Page</title>
+  <style>
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+
+    header {
+      color: #FFFFFF;
+      background-color: black;
+      text-align: center;
+    }
+
+    section {
+      padding: 40px 0;
+      text-align: center;
+
+    }
+
+    .features {
+      background-color: #52848a;
+      color: #000000;
+      margin-top: 20px;
+    }
+
+    .why {
+
+      background: #cadcbf;
+      color: #FFFFFF;
+    }
+
+    #tekst-reciklirane {
+      position: relative;
+      left: 15%;
+      width: 70%;
+      text-align:justify;
+    }
+
+    footer {
+      background: #353535;
+      padding: 32px 0;
+      text-align: center;
+      color: #868686;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin: 0 0 16px 0;
+    }
+
+    h2 {
+      font-weight: 300;
+      font-size: 1.5rem;
+      margin: 0 0 16px 0;
+    }
+
+    #navbar {
+      background: #0c0c0c;
+      padding: 32px 0px;
+      text-align: center;
+      color: #868686;
+      font-size: 20px;
+    }
+
+    #navbar ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    #navbar li {
+      display: inline-block;
+    }
+
+    #navbar li a {
+      padding: 50px;
+      font-size: 90%;
+      text-decoration: none;
+      color: #c3c3c3;
+    }
+
+
+    .container {
+      margin: 0 auto;
+      padding: 0 20px 0 20px;
+      max-width: 900px;
+    }
+
+    .btn {
+      display: inline-block;
+      color: white;
+      font-weight: 500;
+      font-size: 1.25rem;
+      background: #549DA0;
+      border: none;
+      border-radius: 5px;
+      padding: 12px 16px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #468486;
+    }
+
+    .feature {
+      margin: 5px;
+      width: 20%;
+      display: inline-block;
+      font-size: 16px;
+    }
+
+    .feature img {
+      width: 100px;
+      height: 100px;
+    }
+
+    blockquote {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    blockquote p {
+      margin: 0 0 5px 0;
+      font-size: 24px;
+    }
+
+    blockquote cite {
+      font-size: 16px;
+      font-style: italic;
+    }
+
+    blockquote cite:before {
+      content: '-';
+      margin-right: 5px;
+    }
+
+    footer {
+      background: #353535;
+      padding: 32px 0;
+      text-align: center;
+      color: #868686;
+      font-size: 12px;
+    }
+
+    footer ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    footer li {
+      display: inline-block;
+    }
+
+    footer li a {
+      padding: 6px;
+      font-size: 14px;
+      text-decoration: none;
+      color: #c3c3c3;
+    }
+
+    footer li a:hover {
+      color: white;
+    }
+
+    .submenu {
+      display: none;
+      left: 50%;
+      transform: translate(-50%, 0);
+      text-align: center;
+      position: absolute;
+      background-color: #549DA0;
+      min-width: 160px;
+      border-radius: 5px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .submenu a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .submenu a:hover {
+      background-color: #468486;
+    }
+
+    @media screen and (max-width: 480px) {
+      .btn {
+        display: block;
+        font-size: 18px;
+      }
+
+      h1 {
+        font-size: 32px;
+        margin: 0 0 8px 0;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      section {
+        padding: 25px 0 15px 0;
+      }
+
+      .feature {
+        width: 100%;
+        text-align: left;
+        margin: 0 0 10px 0;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .feature img {
+        width: 15%;
+        min-width: 60px;
+        margin-right: 20px;
+      }
+
+      .quote {
+        padding: 30px 0;
+      }
+
+      blockquote p {
+        font-size: 18px;
+      }
+
+      blockquote cite {
+        font-size: 14px;
+      }
+
+      footer {
+        padding: 30px 0 10px 0;
+      }
+
+      footer li {
+        display: block;
+        margin: 5px 0;
+      }
+
+      .submenu {
+        display: none;
+        width: 100%;
+        position: relative;
+      }
+    }
+  </style>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    .mobile-container {
+      max-width: 480px;
+      margin: auto;
+      background-color: #555;
+      height: 500px;
+      color: white;
+      border-radius: 10px;
+    }
+    
+    .topnav {
+      overflow: hidden;
+      background-color: #333;
+      position: relative;
+    }
+    
+    .topnav #myLinks {
+      display: none;
+    }
+    .topnav #myLinks li{
+      list-style: none;
+    }
+    .topnav a {
+      color: white;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+      display: block;
+    }
+    
+    .topnav a.icon {
+      background: black;
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    
+    .topnav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+    
+    .active {
+      background-color: black;
+      color: white;
+    }
+    .imgs{
+      height: 100px;
+      width: 100px;
+    }
+    </style>
+  
+</head>
+
+<body class="mobile-container">
+  <div class="topnav">
+    <div id="home"></div>
+    <a href="#home" class="active" style="font-style: italic;"><b>РЕЦИКЛИРАЈ</b></a>
+    <div id="myLinks">
+      <li><a href="#google-map">Мапа</a></li>
+      <li><a href="#zosto">Информации</a></li>
+      <li><a href="#tim">Тимот</a></li>
+    </div>
+    <a class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+  <header>
+    <div #map id="google-map">
+      <!-- MAPATA E TUKA -->
+      <google-map height="500px" width="100%" [center]="center" [zoom]="zoom">
+        <ng-container *ngFor="let item of markers" >
+          <map-marker  *ngIf="selectedOption == item.title" [position]="item.position" [options]="item.options">
+          </map-marker>
+      </ng-container>
+        <map-marker [position]="new_center">
+
+        </map-marker>
+
+      </google-map>
+    </div>
+    <h2>Селектирајте што ќе рециклирате</h2>
+    <img class="imgs" src="assets/recycle_red.png" (click)="onTitleClick(selectedOption)">
+      <img class="imgs" src="assets/recycle_yellow.png" (click)="onTitleClick2(selectedOption)">
+        <img class="imgs" src="assets/recycle_blue.png" (click)="onTitleClick3(selectedOption)" >
+        <p>Селектирана опција: {{ selectedOption }}</p>
+        <p>{{text1}}</p>
+
+  </header>
+  <section class="why">
+    <p id="zosto" style="    color: green;
+    font-size: 30px;
+    font-family: monospace;">"Зошто рециклирање?"</p>
+    <img style="width: 350px; height: 200px;" src="\assets\chovek.jpg">
+    <p id="tekst-reciklirane"style=" color: green;font-size: 16px;font-family: monospace;" >"Рециклирање (преработка на отпад или добивање на второсуровини) е преработка на
+      користените материјали за добивање нови производи. Со овој процес се спречува губењето на материјали, намалувањето
+      на потрошувачката на нови суровини, се намалува користењето на енергијата, се намалува загадувањето во воздухот и
+      во водата. Се рециклираат многу видови на стакло, хартија, метал, пластика, текстил и електроника. Речиси половина
+      од отпадот што го создаваат луѓето може да се рециклира. Знакот за рециклирање има три стрелки кои ги означуваат
+      трите фази: собирање, преработка и повторна употреба.
+
+      Рециклирањето е трета компонента од таканаречената хиерархија на отпад која гласи „Намали, искористи повторно,
+      рециклирај“[1]. Рециклирањето цели кон подобрување на животната средина со намалување на користењето на нови
+      суровини и создавање на „циркуларна економија“[2], во која на отпадот не се гледа како на финален производ, туку
+      како ресурс за создавање на нови производи.
+
+      Многу типови на стакло, хартија, картонски амбалажи, метали, пластика, гуми, текстил и електроника важат за
+      материјали кои можат да се рециклираат. Компостирањето и другите употреби на биоразградливиот отпад, како што е
+      храната или отпадот од градини, исто така се смета за рециклирање. "</p>
+
+
+  </section>
+  <section class="features">
+    <div class="container">
+      <div id="tim">
+
+      <h3>Тимот</h3>
+      <div class="feature">
+        <img src="/assets/stef.jpg" alt="" />
+        <p>Стефан Крстески</p>
+      </div>
+
+      <div class="feature">
+        <img src="/assets/Miki.jpg" alt="" />
+        <p>Никола Стојановски</p>
+      </div>
+
+      <div class="feature">
+        <img src="/assets/Bato.jpg" alt="" />
+        <p>Дарко Апостолов</p>
+      </div>
+      <div class="feature">
+        <img src="/assets/andrej.jpg" alt="" />
+        <p>Aндреј Петровски</p>
+      </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <ul>
+        <li><a href="#google-map">Мапа</a></li>
+        <li><a href="#zosto">Информации</a></li>
+        <li><a href="#tim">Тимот</a></li>
+      </ul>
+    </div>
+  </footer>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myLinks");
+      if (x.style.display === "block") {
+        x.style.display = "none";
+      } else {
+        x.style.display = "block";
+      }
+    }
+    </script>
+</body>
+
+</html>
