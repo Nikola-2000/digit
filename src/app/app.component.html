@@ -283,7 +283,7 @@
       <!-- MAPATA E TUKA -->
       <google-map height="500px" width="100%" [center]="center" [zoom]="zoom">
 
-        <map-marker *ngFor="let item of markers" [position]="item.position">
+        <map-marker *ngFor="let item of markers" [position]="item.position" [options]="item.options">
         </map-marker>
 
       </google-map>
@@ -296,7 +296,7 @@
       </option>
    </select>
    <button (click)="print()">Click me</button>
-   
+
    <p>Селектирана опција: {{ selectedOption }}</p>
    <p>Најблиска: {{ printedOption }}</p>
 

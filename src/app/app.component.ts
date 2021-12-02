@@ -6,8 +6,6 @@ import { ViewChild } from '@angular/core';
 import { Pipe, PipeTransform } from '@angular/core';
 import { SelectControlValueAccessor } from '@angular/forms';
 import { DomSanitizer, SafeHtml, SafeResourceUrl, SafeScript, SafeStyle, SafeUrl } from '@angular/platform-browser';
-
-import { SafePipe } from 'safe-pipe/lib/safe-pipe.pipe';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -1230,7 +1228,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
         min = this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers[i].position.lat, this.markers[i].position.lng);
         }
       }
-    } 
+    }
     min = min * 1000;
     var str = "Тип: " + this.markers_coordinates[index].name + " Оддалеченост: " + min;
     this.text = str;
@@ -1252,7 +1250,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
           scaledSize: new google.maps.Size(50, 50), // scaled size
           origin: new google.maps.Point(0,0), // origin
           anchor: new google.maps.Point(0, 0) // anchor
-        };   
+        };
       }else if(this.markers_coordinates[i].name == "Plastika/limenki"){
         icon = {
           url: "/assets/recycle_yellow.png", // url
@@ -1260,7 +1258,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
           origin: new google.maps.Point(0,0), // origin
           anchor: new google.maps.Point(0, 0) // anchor
         };
-      
+
       }
       this.markers.push({
         position: {
@@ -1272,7 +1270,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
           text: 'Marker label ' + (i),
         },
         title: this.markers_coordinates[i].name,
-        options: { animation: google.maps.Animation.BOUNCE, icon: icon },
+        options: { animation: google.maps.Animation.DROP, icon: icon },
       })
 
     }
@@ -1289,13 +1287,13 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
         index = i;
         min = this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers[i].position.lat, this.markers[i].position.lng);
       }
-    } 
+    }
     min = min * 1000;
     var str = "Тип: " + this.markers_coordinates[index].name + " Оддалеченост: " + min;
     this.msg=str;
     return this.msg;
   }
- 
+
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition(position => { this.lat = position.coords.latitude });
     navigator.geolocation.getCurrentPosition(position => { this.lng = position.coords.longitude });
@@ -1331,7 +1329,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
         index = i;
         min = this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers[i].position.lat, this.markers[i].position.lng);
       }
-    } 
+    }
     min = min * 1000;
     var str = "Тип: " + this.markers_coordinates[index].name + " Оддалеченост: " + min;
     return str;
@@ -1372,7 +1370,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
         min = this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers[i].position.lat, this.markers[i].position.lng);
         }
       }
-    } 
+    }
     min = min * 1000;
     var str = "Тип: " + this.markers_coordinates[index].name + " Оддалеченост: " + min;
     this.printedOption = str;
