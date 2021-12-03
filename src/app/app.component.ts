@@ -41,6 +41,7 @@ export class MyPipe implements PipeTransform {
 export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
   public selectedOption!: string;
   public printedOption!: string;
+  public counter;
   public distance_route;
   public lat;
   public lng;
@@ -1201,7 +1202,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
     { lng: 22.0185058, lat: 41.4181785, name: "Hartija/kompozit" }
   ];
   markers: any[] = [];
-  title = 'digit';
+  title = 'RecycleNearMe';
 
   constructor(public override sanitizer: DomSanitizer) {
     super(sanitizer);
@@ -1366,7 +1367,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
     return this.markers_coordinates[index].lng;
 
   }
-  setRoutePolyline(){
+  setRoutePolyline(type_container){
 
 
     navigator.geolocation.getCurrentPosition((position)=>{
@@ -1374,10 +1375,11 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
       var min = 2000000000;
 
       for (var i = 0; i < this.markers_coordinates.length; i++) {
-        if (this.getDistanceFromLatLonInKm(position.coords.latitude, position.coords.longitude, this.markers_coordinates[i].lat, this.markers_coordinates[i].lng) < min) {
-
-          index = i;
-          min = this.getDistanceFromLatLonInKm(position.coords.latitude, position.coords.longitude, this.markers_coordinates[i].lat, this.markers_coordinates[i].lng);
+        if(this.markers_coordinates[i].name == type_container){
+          if (this.getDistanceFromLatLonInKm(position.coords.latitude, position.coords.longitude, this.markers_coordinates[i].lat, this.markers_coordinates[i].lng) < min) {
+            index = i;
+            min = this.getDistanceFromLatLonInKm(position.coords.latitude, position.coords.longitude, this.markers_coordinates[i].lat, this.markers_coordinates[i].lng);
+          }
         }
 
       }
@@ -1386,7 +1388,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
         lng:position.coords.longitude,
       }
       var end_1={
-        lat:this.markers_coordinates[index].lat,
+        lat: this.markers_coordinates[index].lat,
         lng: this.markers_coordinates[index].lng,
       }
 
@@ -2607,18 +2609,24 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
     }
 
     //navigator.geolocation.getCurrentPosition((position) =>{
+    navigator.geolocation.getCurrentPosition((position)=>{
     this.map = new google.maps.Map(document.getElementById('map-canvas'),{
         ...this.options_map,
-        center: this.destination_directions
+        center: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
     });
-    //console.log(this.setMarker());
-    this.setRoutePolyline();
-    //console.log("Ova e route" + this.setRoutePolyline());
     this.setMarker();
+    })
+    //console.log(this.setMarker());
+    //this.setRoutePolyline();
+    //console.log("Ova e route" + this.setRoutePolyline());
+
 
     console.log(this.map);
 
-    for (var i = 0; i < this.markers_coordinates.length + 1; i++) {
+    /*for (var i = 0; i < this.markers_coordinates.length + 1; i++) {
       //console.log(this.markers_coordinates[i].name);
       var icon;
       if(this.markers_coordinates[i].name == "Staklo"){
@@ -2660,7 +2668,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
       })
 
       marker.setMap(this.map);
-    }
+    }*/
 
   }
   getYourLat(){
@@ -2726,53 +2734,172 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
     this.printedOption = str;
   }
   text1!:string;
-  onTitleClick(selectedOption) {
+onTitleClick(selectedOption) {
+
     this.selectedOption="Staklo";
+    this.setRoutePolyline("Staklo");
     var index;
-    var min = 600000;
+    var min = 6000;
     navigator.geolocation.getCurrentPosition(position => { this.lat = position.coords.latitude });
     navigator.geolocation.getCurrentPosition(position => { this.lng = position.coords.longitude });
-    for (var i = 0; i < this.markers.length; i++) {
-      if (this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers[i].position.lat, this.markers[i].position.lng) < min) {
-        if("Staklo" == this.markers[i].title){
+    for (var i = 0; i < this.markers_coordinates.length; i++) {
+      if (this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers_coordinates[i].lat, this.markers_coordinates[i].lng) < min) {
+        if("Staklo" == this.markers_coordinates[i].name){
         index = i;
-        min = this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers[i].position.lat, this.markers[i].position.lng);
+        min = this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers_coordinates[i].lat, this.markers_coordinates[i].lng);
         }
       }
     }
     min = min * 1000;
     var str ="Најблискиот контејнер за рециклирање стакло е на оддалеченост од "+ parseInt(min.toString()) + " m";
     this.text1 = str;
+    for (var i = 0; i < this.markers_coordinates.length + 1; i++) {
+      //console.log(this.markers_coordinates[i].name);
+      var icon;
+      if(this.markers_coordinates[i].name == "Staklo"){
+        icon = {
+          url: "/assets/recycle_red.png", // url
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+      }else if(this.markers_coordinates[i].name == "Hartija/kompozit"){
+        icon = {
+          url: "/assets/recycle_blue.png", // url
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+      }else if(this.markers_coordinates[i].name == "Plastika/limenki"){
+        icon = {
+          url: "/assets/recycle_yellow.png", // url
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+
+      }else if(this.markers_coordinates[i].name == "MyPosition"){
+        icon = {
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+
+      }
+      if(this.markers_coordinates[i].name == "Staklo"){
+      var marker = new google.maps.Marker({
+        position: {
+          lat: this.markers_coordinates[i].lat,
+          lng: this.markers_coordinates[i].lng,
+        },
+        options: { animation: google.maps.Animation.DROP, icon: icon },
+      })
+
+      marker.setMap(this.map);
+      }else{
+        var marker = new google.maps.Marker({
+          position: {
+            lat: this.markers_coordinates[i].lat,
+            lng: this.markers_coordinates[i].lng,
+          },
+          options: { animation: google.maps.Animation.DROP, icon: icon },
+        })
+
+        marker.setMap(null);
+      }
+    }
+
+
+
   }
   onTitleClick2(selectedOption) {
     this.selectedOption="Plastika/limenki";
+    this.setRoutePolyline("Plastika/limenki");
     var index;
-    var min = 600000;
+    var min = 6000;
     navigator.geolocation.getCurrentPosition(position => { this.lat = position.coords.latitude });
     navigator.geolocation.getCurrentPosition(position => { this.lng = position.coords.longitude });
-    for (var i = 0; i < this.markers.length; i++) {
-      if (this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers[i].position.lat, this.markers[i].position.lng) < min) {
-        if("Plastika/limenki" == this.markers[i].title){
+    for (var i = 0; i < this.markers_coordinates.length; i++) {
+      if (this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers_coordinates[i].lat, this.markers_coordinates[i].lng) < min) {
+        if("Plastika/limenki" == this.markers_coordinates[i].name){
         index = i;
-        min = this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers[i].position.lat, this.markers[i].position.lng);
+        min = this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers_coordinates[i].lat, this.markers_coordinates[i].lng);
         }
       }
     }
     min = min * 1000
     var str ="Најблискиот контејнер за рециклирање пластика е на оддалеченост од "+ parseInt(min.toString()) + " m";
     this.text1 = str;
+    for (var i = 0; i < this.markers_coordinates.length + 1; i++) {
+      //console.log(this.markers_coordinates[i].name);
+      var icon;
+      if(this.markers_coordinates[i].name == "Staklo"){
+        icon = {
+          url: "/assets/recycle_red.png", // url
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+      }else if(this.markers_coordinates[i].name == "Hartija/kompozit"){
+        icon = {
+          url: "/assets/recycle_blue.png", // url
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+      }else if(this.markers_coordinates[i].name == "Plastika/limenki"){
+        icon = {
+          url: "/assets/recycle_yellow.png", // url
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+
+      }else if(this.markers_coordinates[i].name == "MyPosition"){
+        icon = {
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+
+      }
+      if(this.markers_coordinates[i].name == "Plastika/limenki"){
+      var marker = new google.maps.Marker({
+        position: {
+          lat: this.markers_coordinates[i].lat,
+          lng: this.markers_coordinates[i].lng,
+        },
+        options: { animation: google.maps.Animation.DROP, icon: icon },
+      })
+
+      marker.setMap(this.map);
+      }else{
+        var marker = new google.maps.Marker({
+          position: {
+            lat: this.markers_coordinates[i].lat,
+            lng: this.markers_coordinates[i].lng,
+          },
+          options: { animation: google.maps.Animation.DROP, icon: icon },
+        })
+
+        marker.setMap(null);
+      }
+    }
+
+
   }
   onTitleClick3(selectedOption) {
     this.selectedOption="Hartija/kompozit";
+    this.setRoutePolyline("Hartija/kompozit");
     var index;
-    var min = 600000;
+    var min = 6000;
     navigator.geolocation.getCurrentPosition(position => { this.lat = position.coords.latitude });
     navigator.geolocation.getCurrentPosition(position => { this.lng = position.coords.longitude });
-    for (var i = 0; i < this.markers.length; i++) {
-      if (this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers[i].position.lat, this.markers[i].position.lng) < min) {
-        if("Hartija/kompozit" == this.markers[i].title){
+    for (var i = 0; i < this.markers_coordinates.length; i++) {
+      if (this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers_coordinates[i].lat, this.markers_coordinates[i].lng) < min) {
+        if("Hartija/kompozit" == this.markers_coordinates[i].name){
         index = i;
-        min = this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers[i].position.lat, this.markers[i].position.lng);
+        min = this.getDistanceFromLatLonInKm(this.lat, this.lng, this.markers_coordinates[i].lat, this.markers_coordinates[i].lng);
         }
       }
     }
@@ -2780,6 +2907,63 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
 
     var str ="Најблискиот контејнер за рециклирање хартија е на оддалеченост од "+ parseInt(min.toString()) + " m";
     this.text1 = str;
+    for (var i = 0; i < this.markers_coordinates.length + 1; i++) {
+      //console.log(this.markers_coordinates[i].name);
+      var icon;
+      if(this.markers_coordinates[i].name == "Staklo"){
+        icon = {
+          url: "/assets/recycle_red.png", // url
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+      }else if(this.markers_coordinates[i].name == "Hartija/kompozit"){
+        icon = {
+          url: "/assets/recycle_blue.png", // url
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+      }else if(this.markers_coordinates[i].name == "Plastika/limenki"){
+        icon = {
+          url: "/assets/recycle_yellow.png", // url
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+
+      }else if(this.markers_coordinates[i].name == "MyPosition"){
+        icon = {
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+
+      }
+      if(this.markers_coordinates[i].name == "Hartija/kompozit"){
+      var marker = new google.maps.Marker({
+        position: {
+          lat: this.markers_coordinates[i].lat,
+          lng: this.markers_coordinates[i].lng,
+        },
+        options: { animation: google.maps.Animation.DROP, icon: icon },
+      })
+
+      marker.setMap(this.map);
+      }else{
+        var marker = new google.maps.Marker({
+          position: {
+            lat: this.markers_coordinates[i].lat,
+            lng: this.markers_coordinates[i].lng,
+          },
+          options: { animation: google.maps.Animation.DROP, icon: icon },
+        })
+
+        marker.setMap(null);
+      }
+    }
+
+
   }
 }
 
