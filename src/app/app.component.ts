@@ -64,13 +64,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
     disableDoubleClickZoom: true,
     zoom: this.zoom
   }
-  //map: any;
-  //@ViewChild('map') mapElement: any;
 
-  //map: any;
-  //@ViewChild('map') mapElement: any;
-  //@ViewChild(GoogleMap, { static: false })
-  //map!: GoogleMap;
   markers_coordinates = [
     { lng: 21.3317412, lat: 42.003185, name: "Staklo" },
     { lng: 21.332638, lat: 42.0072291, name: "Staklo" },
@@ -1209,29 +1203,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
 
   }
 
-  /*ngAfterViewInit(): void {
-    navigator.geolocation.getCurrentPosition(position => {this.lat=position.coords.latitude});
-    navigator.geolocation.getCurrentPosition(position => {this.lng=position.coords.longitude});
 
-    const mapProperties = {
-      center: new google.maps.LatLng(this.lat, this.lng),
-      zoom: 2,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties);
-
-    this.markers_coordinates.forEach(location => {
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(location.lat,location.lng),
-        map: this.map
-      });
-
-      this.markers.push(marker);
-
-    });
-
-  }*/
   text!:string;
   onChange($event){
     var index;
@@ -1253,9 +1225,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
 
 
   addMarker() {
-    //console.log(lat_temp);
-    //console.log(lng_temp);
-    //console.log(this.markers_coordinates[this.markers_coordinates.length - 1]);
+
     for (var i = 0; i < this.markers_coordinates.length + 1; i++) {
       //console.log(this.markers_coordinates[i].name);
       var icon;
@@ -2619,9 +2589,7 @@ export class AppComponent extends MyPipe implements OnInit, GoogleMapsModule {
     });
     this.setMarker();
     })
-    //console.log(this.setMarker());
-    //this.setRoutePolyline();
-    //console.log("Ova e route" + this.setRoutePolyline());
+
 
 
     console.log(this.map);
