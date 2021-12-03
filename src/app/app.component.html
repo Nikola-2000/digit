@@ -317,11 +317,27 @@
 
     <br>
     <h2 style="margin-top: 455px;">Селектирајте што ќе рециклирате</h2>
-    <img id="image_1" src="assets/recycle_red.png" (click)="onTitleClick(selectedOption)">
-      <img id="image_2" src="assets/recycle_yellow.png" (click)="onTitleClick2(selectedOption)">
-        <img id="image_3" src="assets/recycle_blue.png" (click)="onTitleClick3(selectedOption)" >
-        <p>Селектирана опција: {{ selectedOption }}</p>
-        <p>{{text1}}</p>
+
+    <div style="display: flex; margin-left: 310px;">
+        <figure>
+        <img class="zoom" id="image_1" src="assets/recycle_red.png" (click)="onTitleClick(selectedOption)">
+        <figcaption>Стакло</figcaption>
+        </figure>
+        <figure>
+        <img class="zoom" id="image_2" src="assets/recycle_yellow.png" (click)="onTitleClick2(selectedOption)">
+        <figcaption>Пластика/лименки</figcaption>
+      </figure>
+      <figure>
+        <img class="zoom" id="image_3" src="assets/recycle_blue.png" (click)="onTitleClick3(selectedOption)" >
+        <figcaption>Хартија</figcaption>
+      </figure>
+    </div>
+        <p style="font-size: 30px;
+        font-weight: 700;
+        font-family: 'Roboto';">Селектирана опција: {{ selectedOption }}</p>
+        <p style="font-size: 30px;
+        font-weight: 700;
+        font-family: 'Roboto';">{{text1}}</p>
   </header>
   <section class="why" id="2">
     <p id="zosto" style="    color:black;
@@ -352,21 +368,30 @@
 
       <h3>Тимот</h3>
       <div class="feature">
+        <a target="_blank" href="https://www.facebook.com/stefan.krsteski1">
         <img src="/assets/stef.jpg" alt="" />
+      </a>
         <p>Стефан Крстески</p>
       </div>
 
       <div class="feature">
+        <a target="_blank" href="https://www.facebook.com/nikola.stojanovski2000">
         <img src="/assets/Miki.jpg" alt="" />
+      </a>
         <p>Никола Стојановски</p>
       </div>
 
+
       <div class="feature">
+        <a target="_blank" href="https://www.facebook.com/darko.apostolov.56">
         <img src="/assets/Bato.jpg" alt="" />
+        </a>
         <p>Дарко Апостолов</p>
       </div>
       <div class="feature">
-        <img src="/assets/andrej.jpg" alt="" />
+        <a target="_blank" href="https://www.facebook.com/andrej.petrovski10">
+        <img src="/assets/andrej.jpg" alt="">
+        </a>
         <p>Aндреј Петровски</p>
       </div>
 
